@@ -1,0 +1,42 @@
+type Query {
+  quiz(uuid: String!): Quiz
+  quizzes(project_uuid: String): [Quiz]
+  question(uuid: String!): Question
+  questions(quiz_uuid: String): [Question]
+  answer(uuid: String!): Answer
+  answers(question_uuid: String): [Answer]
+  submission(uuid: String!): Submission
+  submissions(user_uuid: String): [Submission]
+}
+
+type Quiz {
+  uuid: String!
+  project_uuid: String!
+  timestamp: Int!
+  at_end: Boolean!
+}
+
+enum question_types_enum {
+  POLL
+  SINGLE_ANSWER_MULTIPLE_CHOICE
+}
+type Question {
+  uuid: String!
+  quiz_uuid: String!
+  type: question_types_enum!
+  body: String!
+}
+
+type Answer {
+  uuid: String!
+  question_uuid: String!
+  body: String!
+  is_correct: Boolean!
+}
+
+type Submission {
+  uuid: String!
+  user_uuid: String!
+  question_uuid: String!
+  answer_uuid: String!
+}
